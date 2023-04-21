@@ -16,7 +16,7 @@ class TechnologySeeder extends Seeder
      */
     public function run(Faker $faker)
 {
-  $labels = ["HTML", "CSS", "SQL", "JavaScript","JSON", "PHP", "GIT", "Blade"];
+  $labels = ["HTML", "CSS", "SQL", "JavaScript","JSON", "PHP", "GIT", "Blade","Python","Java"];
 
   foreach($labels as $label) {
     $technology = new Technology;

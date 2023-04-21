@@ -53,6 +53,14 @@
             @endif
           </a>
         </th>
+        <th  scope="col">
+          <a href="{{route('admin.projects.index')}}?sort=name&order={{$sort == 'name' && $order != 'DESC' ? 'DESC' : 'ASC' }}">
+            Technologies
+            @if ($sort == 'name')
+            <i class="bi bi-arrow-down d-inline-block @if($order == 'DESC')rotate-180 @endif"></i>
+            @endif
+          </a>
+        </th>
           <th scope="col">
             <a href="{{route('admin.projects.index')}}?sort=contributors&order={{$sort == 'contributors' && $order != 'DESC' ? 'DESC' : 'ASC' }}">
               Contributors
@@ -98,6 +106,19 @@
           <th>{{$project->id}}</th>
           <td>{{$project->name}}</td>
           <td><span class="badge rounded-pill" style="background-color: {{$project->type?->color}}">{{$project->type?->label}}</span></td>
+          <td>
+            @forelse ($projects->technologies as $technology)
+            <span class="badge rounded-pill" style="background-color: {{$technology->color}}">{{$technology->label}}</span>
+            @if (!$loop->last)
+               , 
+            @endif
+            @empty
+              Foreign tech.
+            @endforelse
+
+
+
+          </td>
           <td>{{$project->contributors}}</td>
           <td>{{$project->getAbstract()}}</td>
           <td>{{$project->created_at}}</td>

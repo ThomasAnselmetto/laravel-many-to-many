@@ -17,7 +17,7 @@ class TypeSeeder extends Seeder
      */
     public function run(Faker $faker)
     {
-        $labels = ["Bootstrap", "Tailwind", "Vue", "Laravel", "PHPMyAdmin"];
+        $labels = ["Bootstrap", "Tailwind","Angular", "Vue", "Laravel", "PHPMyAdmin","Ruby on Rails"];
 
         foreach($labels as $label) {
             $type = new Type();
