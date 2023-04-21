@@ -81,6 +81,8 @@ class ProjectController extends Controller
 
         ]);
         $data = $request->all();
+        $data["slug"] = Project::generateSlug($data["name"]);
+        // $data["published"] = $request->has("published") ? 1 : 0;
 
         $path = null;
         if (Arr::exists($data, 'project_preview_img')) {
@@ -91,7 +93,6 @@ class ProjectController extends Controller
 
         $project = new Project;
         $project->fill($data);
-        $project->slug = Project::generateSlug($project->name);
         $project->project_preview_img = $path;
         $project->save();
 
@@ -141,6 +142,7 @@ class ProjectController extends Controller
         $request->validate([
             'project_preview_img'=>'nullable|image|mimes:jpg,png,jpeg',
             'name'=>'required|string|max:100',
+            'published'=>'boolean',
             'contributors'=>'required|integer',
             'description'=>'required|string',
             'type_id'=>'nullable|exists:types,id'
@@ -160,6 +162,8 @@ class ProjectController extends Controller
 
         ]);
         $data = $request->all();
+        $data["slug"] = Project::generateSlug($data["name"]);
+        $data["published"] = $request->has("published") ? 1 : 0;
 
         $path = null;
         if (Arr::exists($data, 'project_preview_img')) {

@@ -45,20 +45,16 @@
           @enderror
         </div>
 
-        <div class="col-6 my-2 ">
-          <label class="form-label" for="type_id">Type</label>
-          <select  name="type_id" id="type_id" class="form-select @error('type_id') is-invalid" @enderror  multiple aria-label="multiple select example">
-            <option value="">Without Type</option>
-            @foreach ($types as $type)
-            <option @if(old('type_id',$project->type_id) == $type->id) selected @endif value="{{$type->id}}">{{$type->label}}</option>
-            @endforeach
-          </select>
-          @error('type_id')
+        <div class="col-1 my-2">
+          <label class="form-check d-inline-block ps-0" for="published">Published</label>
+          <input type="checkbox" name="published" id="published" value="1" class="@error('published') is-invalid @enderror form-check-control" @checked(old('published',$project->published))>
+          @error('published')
           <div class="invalid-feedback">
             {{$message}}
         </div>
         @enderror
-        </div>
+      </div>
+        
         
                 
           
