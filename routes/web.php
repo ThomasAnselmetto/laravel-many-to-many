@@ -20,6 +20,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [GuestHomecontroller::class, 'index']);
 
+
+
+
+
 // stabilisco chi controlla questa rotta e come si chiama
 Route::get('/home',[ProjectController::class,'index'])->middleware('auth')->name('home');
 
@@ -37,10 +41,12 @@ Route::delete('/projects/{project}/force-delete',[ProjectController::class, 'for
 
 Route::resource('projects', ProjectController::class);
 
+// ! Controller per le types
+
 Route::resource('types', TypeController::class);
 // ->parameters(['projects' => 'project:slug']); 
 });
-
+// ! Controller per l'auth
 Route::middleware('auth')
 // tutte le rotte di questo gruppo hanno come prefisso profile e gli do prefix()
     ->prefix('profile')

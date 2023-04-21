@@ -23,6 +23,7 @@ class ProjectSeeder extends Seeder
     public function run(Faker $faker)
     {       
             $types = Type::all()->pluck('id')->toArray();
+            
 
         for($i = 0;$i < 50;$i++){
             $type_id = (random_int(0, 1) === 1) ? $faker->randomElement($types) : null;

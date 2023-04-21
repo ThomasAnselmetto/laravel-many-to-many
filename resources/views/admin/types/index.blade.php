@@ -115,7 +115,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body fs-2 fw-bold">
-        Are you sure you want to (partial)delete the type with label {{$type->label}}?
+        Are you sure you want to delete the type with label {{$type->label}}?
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-info text-light border fw-bold" data-bs-dismiss="modal">Close</button>
