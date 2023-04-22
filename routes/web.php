@@ -45,6 +45,8 @@ Route::resource('projects', ProjectController::class);
 
 Route::resource('types', TypeController::class);
 // ->parameters(['projects' => 'project:slug']); 
+
+Route::get('/technologies/index', [TechnologyController::class, 'index']);
 });
 // ! Controller per l'auth
 Route::middleware('auth')

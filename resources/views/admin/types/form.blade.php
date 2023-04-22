@@ -41,7 +41,7 @@
             @enderror
         </div>
         
-        <div class="col-5">
+        <div class="col-8">
           <input type="submit" class="btn btn-primary align-self-end fw-bold col-3 mt-3" value="Save">
         </div>
       </form>

@@ -101,10 +101,12 @@
         <tr class="table-dark w-100">
           <th>{{$project->id}}</th>
           <td>{{$project->name}}</td>
-          <td><span class="badge rounded-pill" style="background-color: {{$project->type?->color}}">{{$project->type?->label}}</span></td>
+          <td>
+            {!! $project->type?->getBadgeHTML() !!}
+          </td>
           <td>
             @forelse ($project->technologies as $technology)
-            <span class="badge rounded-pill" style="background-color: {{$technology->color}}">{{$technology->label}}</span>
+            {!! $technology->getBadgeHTML() !!}
             @unless ($loop->last)
                , 
             @endunless

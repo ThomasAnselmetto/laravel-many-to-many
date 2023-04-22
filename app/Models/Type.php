@@ -15,7 +15,7 @@ class Type extends Model
         return $this->HasMany(Project::class);
     }
 
-    // public function getTypeBadgeHTML(){
-    //     return '<span class="bedge" style="background-color:' . $this->color . '">' . $this->label . '</span';
-    // }
+    public function getBadgeHTML(){
+        return '<span class="badge " style="background-color:' . $this->color . '">' . $this->label . '</span>';
+    }
 }

@@ -12,7 +12,7 @@ class Technology extends Model
     public function projects(){
         return $this->belongsToMany(Project::class);
     }
-    // public function getTechBadgeHTML(){
-    //     return '<span class="bedge" style="background-color:' . $this->color . '">' . $this->label . '</span';
-    // }
+    public function getBadgeHTML(){
+        return '<span class="badge rounded-pill" style="background-color:' . $this->color . '">' . $this->label . '</span>';
+    }
 }

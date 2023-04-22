@@ -29,9 +29,26 @@
           <img class="my-4 img-fluid" src="{{$project->getImageUri()}}" >
           <h2 class="card-title mb-3">Project Name:</h2>
           <h3 class="mb-3 text-color"> {{$project->name}}</h3>
-          <h3 class="mb-3 text-color">Type:<span class="badge rounded-pill" style="background-color: {{$project->type?->color}}">{{$project->type?->label}}</span></h3>
+          <div>
+            @if($project->type)
+            {!! $project->type?->getBadgeHTML() !!}
+            @else
+            Whitout Type
+            @endif
+          </div>
+                
+                
+          <div class="my-2">
+            @forelse ($project->technologies as $technology)
+              {!! $technology->getBadgeHTML() !!}
+            @empty
+            Whitout Technology
+            @endforelse
+                
+          </div>
+
           {{-- <h3 class="mb-3 text-color">Technology:<span class="badge rounded-pill" style="background-color: {{$technology->color}}">{{$technology->label}}</span></h3> --}}
-          <h4 class="card-title mb-3">Contributors:  {{$project->contributors}}</h4>
+          <h4 class="card-title my-3">Contributors:  {{$project->contributors}}</h4>
           <h4 class="card-text mb-3 border border-dark p-2">Description:  {{$project->description}}</h4>
           <a href="https://github.com/ThomasAnselmetto?tab=repositories" class="btn btn-primary mt-3">Apri la Repo su Github</a>
         </div>
