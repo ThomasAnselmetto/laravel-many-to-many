@@ -73,10 +73,19 @@
           </div>
         </div>
 
-
-
-
-
+        {{-- ! Tecnologies  --}}
+        <div class="col">
+          @foreach ($technologies as $technology)
+            <input type="checkbox" id="technology-{{$technology->id}}" value="{{$technology->id}}" class="@error('technologies') is-invalid @enderror form-check-control" name="technologies[]" @if(in_array($technology->id,old('tecnologie',$project_technologies ?? [])))checked @endif>
+            <label for="technology-{{$technology->id}}">{{$technology->label}}</label> 
+            <br>
+          @endforeach
+          @error('technologies')
+          <div class="invalid-feedback">
+            {{$message}}
+          </div>
+          @enderror
+        </div>
 
         {{-- ! Contributors  --}}
         <div class="col-2 my-4">
@@ -87,21 +96,9 @@
             {{$message}}
           </div>
            @enderror
-        </div>
-        {{-- ! Tecnologies  --}}
-        
-         <div class="col">
-           @foreach ($technologies as $technology)
-             <input type="checkbox" id="technology-{{$technology->id}}" value="{{$technology->id}}" class="@error('technologies') is-invalid @enderror form-check-control" name="technologies[]" @if(in_array($technology->id,old('tecnologie',$project_technologies ?? [])))checked @endif>
-             <label for="technology-{{$technology->id}}">{{$technology->label}}</label> 
-             <br>
-           @endforeach
-           @error('technologies')
-           <div class="invalid-feedback">
-             {{$message}}
-           </div>
-            @enderror
           </div>
+          
+         
          
 
         {{-- ! Description  --}}
@@ -125,6 +122,9 @@
   </div>
 </section>
 @endsection
+
+
+
 
 
         
