@@ -6,6 +6,7 @@ use App\Http\Controllers\Guest\HomeController as GuestHomecontroller;
 
 use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Controllers\Admin\TypeController;
+use App\Http\Controllers\Admin\TechnologyController;
 use Illuminate\Support\Facades\Route;
 /*
 |--------------------------------------------------------------------------
