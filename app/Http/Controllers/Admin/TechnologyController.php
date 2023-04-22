@@ -13,9 +13,13 @@ class TechnologyController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        //
+    public function index(Request $request)
+    {   
+        $sort = (!empty($sort_request = $request->get('sort'))) ? $sort_request : 'updated_at';
+      $order = (!empty($order_request = $request->get('order'))) ? $order_request : 'DESC';
+      $types = Technology::orderBy($sort, $order)->paginate(15)->withQueryString();
+
+        return view('admin.technology.form',compact('technology'));
     }
 
     /**
@@ -23,10 +27,13 @@ class TechnologyController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request, Technology $technology)
     {
-        //
+        $technology = new Technology;
+        return view('admin.technology.form',compact('technology'));
     }
+    
+    
 
     /**
      * Store a newly created resource in storage.
@@ -34,9 +41,30 @@ class TechnologyController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request,Technology $technology)
     {
-        //
+        $request->validate([
+            'label' => 'required|string|max:20',
+            'color' => 'required|string|size:7'
+
+
+        ],
+        [
+            'label.required' => 'Label is Required',
+            'label.string' => 'Label must be a string',
+            'label.max' => 'The Label must contain a maximum of 100 chars',
+            'color.required' => 'Label is Required',
+            'color.string' => 'Color must be a string',
+            'color.size' => 'Color must contain exactly 7 chars (es. #ffffff)'
+
+        ]);
+
+            $technology = new Technology;
+            $technology->fill($request->all());
+            $technology->save();
+
+            return to_route('admin.technology.show',$technology)
+            ->with('message',"Technology $technology->label created successfully");
     }
 
     /**
@@ -47,7 +75,7 @@ class TechnologyController extends Controller
      */
     public function show(Technology $technology)
     {
-        //
+        return view('admin.technology.show',compact('technology'));
     }
 
     /**
@@ -58,7 +86,7 @@ class TechnologyController extends Controller
      */
     public function edit(Technology $technology)
     {
-        //
+        return view('admin.technology.form',compact('technology'));
     }
 
     /**
@@ -70,7 +98,28 @@ class TechnologyController extends Controller
      */
     public function update(Request $request, Technology $technology)
     {
-        //
+        $request->validate([
+            'label' => 'required|string|max:20',
+            'color' => 'required|string|size:7'
+
+
+        ],
+        [
+            'label.required' => 'Label is Required',
+            'label.string' => 'Label must be a string',
+            'label.max' => 'The Label must contain a maximum of 100 chars',
+            'color.required' => 'Label is Required',
+            'color.string' => 'Color must be a string',
+            'color.size' => 'Color must contain exactly 7 chars (es. #ffffff)'
+
+        ]);
+
+            
+            $technology->update($request->all());
+            
+
+            return to_route('admin.technology.show',$technology)
+            ->with('message',"Technology $technology->label modified successfully");
     }
 
     /**
@@ -81,6 +130,9 @@ class TechnologyController extends Controller
      */
     public function destroy(Technology $technology)
     {
-        //
+        $technology_id = $technology->id;
+        $technology->delete();
+        return to_route('admin.technology.index')
+            ->with('message',"Technology $technology_id Deleted successfully");
     }
 }

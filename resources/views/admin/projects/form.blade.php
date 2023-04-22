@@ -59,7 +59,7 @@
         <label class="form-label d-inline-block ps-0" for="type_id">Type</label>
           <div class="col-12 my-4">
           
-          <select class="form-select" >
+          <select name="type_id" id="type_id" class="form-select" @error('type_id') is-invalid @enderror>
             <option value="">Without Type</option>
             @foreach ($types as $type)
             <option @if (old('type_id',$project->type_id) == $type->id) selected @endif value="{{$type->id}}">{{$type->label}}</option>

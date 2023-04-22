@@ -76,7 +76,7 @@
           
           
       <tbody>
-        @foreach ($types as $type)
+        @forelse ($types as $type)
             
         <tr class="table-dark w-100">
           <th>{{$type->id}}</th>
@@ -96,7 +96,13 @@
           </td>
           
         </tr>
-        @endforeach
+        @empty
+        <tr>
+          <td colspan="6">
+            No Data Here!
+          </td>
+        </tr>
+        @endforelse
       </tbody>
     </table>
     {{-- {{ $types->links('') }} --}}

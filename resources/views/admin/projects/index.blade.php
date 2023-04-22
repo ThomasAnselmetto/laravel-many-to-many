@@ -97,8 +97,7 @@
         </tr>
       </thead>
       <tbody>
-        @foreach ($projects as $project)
-            
+        @forelse ($projects as $project)
         <tr class="table-dark w-100">
           <th>{{$project->id}}</th>
           <td>{{$project->name}}</td>
@@ -126,7 +125,14 @@
             <button class="bi bi-clipboard2-x-fill text-danger delete-icon {{route('admin.projects.trash')}}?sort=" data-bs-toggle="modal" data-bs-target="#delete-modal-{{$project->id}}"></button>
           </td>
         </tr>
-        @endforeach
+        @empty
+        <tr>
+          <td colspan="9">
+            No Data Here!
+          </td>
+        </tr>
+            
+        @endforelse
       </tbody>
     </table>
     {{ $projects->links('') }}
