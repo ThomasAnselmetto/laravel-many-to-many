@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+// use App\Models\Technology;
 use App\Models\Type;
 use Illuminate\Http\Request;
 
@@ -17,9 +18,9 @@ class TypeController extends Controller
     {   
         $sort = (!empty($sort_request = $request->get('sort'))) ? $sort_request : 'updated_at';
       $order = (!empty($order_request = $request->get('order'))) ? $order_request : 'DESC';
-      $types = Type::orderBy($sort, $order)->paginate(5)->withQueryString();
+      $types = Type::orderBy($sort, $order)->paginate(15)->withQueryString();
 
-        $types = Type::all();
+        // $types = Type::all();
         return view('admin.types.index', compact('types','sort','order'));
     }
 
@@ -33,6 +34,7 @@ class TypeController extends Controller
 
         $type = new Type;
         return view('admin.types.form',compact('type'));
+        
     }
 
     /**
@@ -86,6 +88,7 @@ class TypeController extends Controller
      */
     public function edit(Type $type)
     {
+        
         return view('admin.types.form',compact('type'));
     }
 

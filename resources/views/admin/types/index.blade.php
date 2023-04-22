@@ -17,7 +17,7 @@
     <div class="row">
      
       <div class="col-12 d-flex justify-content-end">
-        <a type="button" class="btn btn-success border fw-bold" href="{{route('admin.types.create')}}">Create New type Link</a>
+        <a type="button" class="btn btn-success border fw-bold" href="{{route('admin.types.create')}}">Create New Type</a>
       </div>
     </div>
     
@@ -44,7 +44,7 @@
             </a>
           </th>
         </th>
-        color
+        
           <th scope="col">
             <a href="{{route('admin.types.index')}}?sort=color&order={{$sort == 'color' && $order != 'DESC' ? 'DESC' : 'ASC' }}">
               Color

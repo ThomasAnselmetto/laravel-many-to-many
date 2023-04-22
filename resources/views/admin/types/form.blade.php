@@ -3,14 +3,14 @@
 @section('content')
 <section class="container">
   @section('title')
-  <h1 class="mt-4 mb-5">Create and Edit</h1>
+  <h1 class="mt-4 mb-5">Create and Edit Type</h1>
   @endsection
 
   @include('partials.errors')
 
-  <div class="card">
-color    <div class="card-body">
-      {{-- rendo riutilizzabile ilform sia per il create che per l'edit --}}
+  <div class="card col-5">
+    <div class="card-body">
+      {{-- rendo riutilizzabile il form sia per il create che per l'edit --}}
       {{-- aggiungo enctype perche avendo aggiunto le immagini al portfolio ho bisogno di enctype per i file
          --}}
       @if ($type->id)
@@ -21,8 +21,8 @@ color    <div class="card-body">
   @endif 
       @csrf
       
-      <div class="col-8">
-          <div class="col-6 my-2">
+
+          <div class="col-12 my-2">
             <label class="form-label" for="label">Label</label>
             <input type="text" name="label" id="label" class="@error('label') is-invalid @enderror form-control" value="{{old('label', $type->label)}}">
             @error('label')
@@ -31,24 +31,39 @@ color    <div class="card-body">
             </div>
             @enderror
           </div>
-          <div class="col-3 my-2">
-            <label class="form-label" for="color">color</label>
-            <input type="color" name="color" id="color" class="@error('color') is-invalid @enderror form-control" value="{{old('color', $type->color)}}">
+          <div class="col-12 my-2">
+            <label class="form-check ps-0" for="color">Color</label>
+            <input type="color" name="color" id="color" class="@error('color') is-invalid @enderror form-check-control" value="{{old('color', $type->color)}}">
             @error('color')
             <div class="invalid-feedback">
               {{$message}}
             </div> 
             @enderror
         </div>
-        <div class="col-3">
-          <input type="submit" class="btn btn-primary align-self-end fw-bold w-50" value="Save">
+        
+        <div class="col-5">
+          <input type="submit" class="btn btn-primary align-self-end fw-bold col-3 mt-3" value="Save">
         </div>
-      </div>
+      </form>
+    </div>
+  </div>
+  </section>
+  @endsection
+            
+
+
+
+  
+        
+           
+        
+             
+        
+
       
     
 
       
-    </form>
         
         
       
@@ -57,10 +72,6 @@ color    <div class="card-body">
 
       
 
-    </div>
-  </div>
-</section>
-@endsection
 
       
 

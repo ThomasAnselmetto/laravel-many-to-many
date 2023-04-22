@@ -3,7 +3,7 @@
 @section('content')
 <section class="container">
   @section('title')
-  <h1 class="mt-4 mb-5">Create and Edit</h1>
+  <h1 class="mt-4 mb-5">Create and Edit Project</h1>
   @endsection
 
   @include('partials.errors')
@@ -22,7 +22,8 @@
       @csrf
       <div class="col-8">
 
-        <div class="col-10 my-2">
+         {{-- ! Image  --}}
+        <div class="col-10">
           <label class="form-label" for="project_preview_img">Image</label>
 
           <input type="file" name="project_preview_img" id="project_preview_img" class="@error('project_preview_img') is-invalid @enderror form-control">
@@ -31,11 +32,10 @@
           <div class="invalid-feedback">
               {{$message}}
           </div>
-        @enderror
+          @enderror
         </div>
-        
-        
-        <div class="col-6 my-2">
+        {{-- ! Name  --}}
+        <div class="col-6 my-4">
           <label class="form-label" for="name">Name</label>
           <input type="text" name="name" id="name" class="@error('name') is-invalid @enderror form-control" value="{{old('name', $project->name)}}">
           @error('name')
@@ -44,32 +44,68 @@
           </div>
           @enderror
         </div>
-
-        <div class="col-1 my-2">
+        {{-- ! Published  --}}
+        <div class="col-1 my-4">
           <label class="form-check d-inline-block ps-0" for="published">Published</label>
           <input type="checkbox" name="published" id="published" value="1" class="@error('published') is-invalid @enderror form-check-control" @checked(old('published',$project->published))>
           @error('published')
           <div class="invalid-feedback">
             {{$message}}
+          </div>
+          @enderror
         </div>
-        @enderror
-      </div>
-        
-        
-                
+        {{-- ! Type  --}}
+        <div class="col my-4">
+        <label class="form-label d-inline-block ps-0" for="type_id">Type</label>
+          <div class="col-12 my-4">
           
-        <div class="col-2 my-2">
+          <select class="form-select" >
+            <option value="">Without Type</option>
+            @foreach ($types as $type)
+            <option @if (old('type_id',$project->type_id) == $type->id) selected @endif value="{{$type->id}}">{{$type->label}}</option>
+            @endforeach
+          </select>
+          @error('type_id')
+          <div class="invalid-feedback">
+            {{$message}}
+          </div>
+           @enderror
+          </div>
+        </div>
+
+
+
+
+
+
+        {{-- ! Contributors  --}}
+        <div class="col-2 my-4">
           <label class="form-label" for="contributors">Contributors</label>
           <input type="number" name="contributors" id="contributors" class="@error('contributors') is-invalid @enderror form-control" value="{{old('contributors', $project->contributors)}}">
           @error('contributors')
           <div class="invalid-feedback">
             {{$message}}
+          </div>
+           @enderror
         </div>
-        @enderror
-      </div>
-      
-    
-        <div class="col-12 my-2">
+        {{-- ! Tecnologies  --}}
+        
+         <div class="col">
+           @foreach ($technologies as $technology)
+             <input type="checkbox" id="technology-{{$technology->id}}" value="{{$technology->id}}" class="@error('technologies') is-invalid @enderror form-check-control" name="technologies[]" @if(in_array($technology->id,old('tecnologie',$project_technologies ?? [])))checked @endif>
+             <label for="technology-{{$technology->id}}">{{$technology->label}}</label> 
+             <br>
+           @endforeach
+           @error('technologies')
+           <div class="invalid-feedback">
+             {{$message}}
+           </div>
+            @enderror
+          </div>
+         
+
+        {{-- ! Description  --}}
+        <div class="col-12 my-4">
           <label class="form-label" for="description">Description</label>
           <input type="text" name="description" id="description" class="@error('description') is-invalid @enderror form-control" value="{{old('description', $project->description)}}">
           @error('description')
@@ -77,27 +113,37 @@
             {{$message}}
           </div> 
           @enderror
-      </div>
-      </div>
-      <div class="col-4 d-flex flex-wrap justify-content-end">
-        <img src="{{$project->getImageUri()}}" class="img-fluid" alt="">
+        </div>
+        {{-- ! Image Preview --}}
+        <div class="col-4 d-flex flex-wrap justify-content-end my-4">
+          <img src="{{$project->getImageUri()}}" class="img-fluid" alt="">
+        </div>
+
         <input type="submit" class="btn btn-primary align-self-end fw-bold w-50" value="Save">
-      </div>
-    </form>
-        
-        
-      
-        
-        
-
-      
-
+      </form>
     </div>
   </div>
 </section>
 @endsection
 
+
+        
+        
+          
+
+      
+    
+        
+        
+      
+        
+        
+
+      
+
+
       
 
 
 
+        

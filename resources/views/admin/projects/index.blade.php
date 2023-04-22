@@ -96,9 +96,6 @@
           <th scope="col">Actions</th>
         </tr>
       </thead>
-              
-          
-          
       <tbody>
         @foreach ($projects as $project)
             
@@ -107,48 +104,33 @@
           <td>{{$project->name}}</td>
           <td><span class="badge rounded-pill" style="background-color: {{$project->type?->color}}">{{$project->type?->label}}</span></td>
           <td>
-            @forelse ($projects->technologies as $technology)
+            @forelse ($project->technologies as $technology)
             <span class="badge rounded-pill" style="background-color: {{$technology->color}}">{{$technology->label}}</span>
-            @if (!$loop->last)
+            @unless ($loop->last)
                , 
-            @endif
+            @endunless
             @empty
               Foreign tech.
             @endforelse
-
-
-
           </td>
           <td>{{$project->contributors}}</td>
           <td>{{$project->getAbstract()}}</td>
           <td>{{$project->created_at}}</td>
           <td>{{$project->updated_at}}</td>
           
-          <td class="d-flex flex-row align-items-center justify-content-between">
+          <td class="d-flex flex-column align-items-center justify-content-between gx-3">
             <a class="" href="{{ route('admin.projects.show', ['project' => $project ])}}"><i class="bi bi-aspect-ratio-fill text-primary fs-5  "></i></a>
             
             <a class="" href="{{ route('admin.projects.edit', ['project' => $project ])}}"><i class="bi bi-pencil text-primary fs-5  "></i></a>
 
             <button class="bi bi-clipboard2-x-fill text-danger delete-icon {{route('admin.projects.trash')}}?sort=" data-bs-toggle="modal" data-bs-target="#delete-modal-{{$project->id}}"></button>
-            
-            
           </td>
-          
         </tr>
         @endforeach
       </tbody>
-              
-          
-              
-              
-              
-              
-          
     </table>
     {{ $projects->links('') }}
   </div>
-
-
   @section('modals')
 @foreach($projects as $project)
 <div class="modal fade" id="delete-modal-{{$project->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -188,20 +170,20 @@
 
 @endsection
 
-      
-      
-      
-      
 
-{{-- <td class="d-flex justify-content-between">
-  <a class="" href="{{ route('projects.show', ['project' => $project ])}}"><i class="bi bi-sliders2-vertical text-success fs-3"></i></a>
-  <a class="" href="{{ route('projects.edit', ['project' => $project ])}}"><i class="bi bi-bandaid-fill text-success fs-3"></i></a>
- 
-  <button class="bi bi-clipboard2-x-fill text-danger delete-icon fs-3" data-bs-toggle="modal" data-bs-target="#delete-modal-{{$project->id}}"></button>
-</td> --}}
 
- {{-- $songs = Song::where('title','LIKE',"%$term%")
- <form class="d-flex my-2 my-lg-0">
-       <input class="form-control me-sm-2" name="term" type="text" placeholder="Search Songs">
-       <button class="btn btn-light my-2 my-sm-0 fw-bold" type="submit">Search</button>
-     </form> --}}
+              
+          
+          
+            
+            
+          
+              
+          
+              
+              
+              
+              
+          
+
+
