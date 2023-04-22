@@ -34,6 +34,7 @@ Route::middleware('auth')->prefix('/admin')->name('admin.')->group(function(){
 
 // ricorda sempre la resourse vuole questa sintassi nella rotta
 // mentre get e le altre questa
+
 Route::get('/projects/trash',[ProjectController::class, 'trash'])->name('projects.trash');
 
 Route::put('/projects/{project}/restore',[ProjectController::class, 'restore'])->name('projects.restore');
@@ -47,8 +48,12 @@ Route::resource('projects', ProjectController::class);
 Route::resource('types', TypeController::class);
 // ->parameters(['projects' => 'project:slug']); 
 
-Route::get('/technologies/index', [TechnologyController::class, 'index']);
+// ! Controller per le technologies
+
+Route::get('/technologies/index',[ProjectController::class, 'index'])->name('technologies.index');
 });
+
+
 // ! Controller per l'auth
 Route::middleware('auth')
 // tutte le rotte di questo gruppo hanno come prefisso profile e gli do prefix()
